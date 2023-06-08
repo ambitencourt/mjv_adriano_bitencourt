@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../core/constants.dart';
+import '../../core/custom_spacer.dart';
+import '../../core/text_widget.dart';
+import '../../stores/home_store.dart';
+import 'profile_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,47 +18,62 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Adriano Bitencourt'),
-      ),
-      body: Container(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            const Card(
-              margin: EdgeInsets.all(10),
-            ),
-            const SizedBox(height: 16),
-            const Text(
-              'Minhas estatísticas',
-              style: TextStyle(fontSize: 18),
-            ),
-            const SizedBox(height: 16),
-            Row(
-              children: const [
-                Icon(Icons.list),
-                SizedBox(width: 8),
-                Text('Concluídas: '),
-                Text('0'),
-              ],
-            ),
-            const SizedBox(height: 16),
-            const Divider(),
-            const SizedBox(height: 16),
-            const Text(
-              'Minhas estatísticas',
-              style: TextStyle(fontSize: 18),
-            ),
-            const SizedBox(height: 16),
-            Row(
-              children: const [
-                Icon(Icons.list),
-                SizedBox(width: 8),
-                Text('Concluídas: '),
-                Text('0'),
-              ],
-            ),
-          ],
+      body: SafeArea(
+        top: true,
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const ProfileWidget(),
+              const CustomSpacer(),
+              const Divider(),
+              const TextWidget('Minhas estatísticas', fontSize: 18),
+              const CustomSpacer(),
+              Consumer<HomeStore>(builder: (context, store, _) {
+                return Column(
+                  children: [
+                    Row(
+                      children: [
+                        const Icon(Icons.list),
+                        const SizedBox(width: 8),
+                        TextWidget('Total de notas: ${store.count}',
+                            fontSize: 13),
+                      ],
+                    ),
+                    const CustomSpacer(),
+                    Row(
+                      children: [
+                        const Icon(Icons.list),
+                        const SizedBox(width: 8),
+                        TextWidget('Concluídas: ${store.count}', fontSize: 13),
+                      ],
+                    ),
+                  ],
+                );
+              }),
+              const CustomSpacer(),
+              const Divider(),
+              const CustomSpacer(),
+              const TextWidget('Configurações', fontSize: 18),
+              const CustomSpacer(),
+              Consumer<HomeStore>(builder: (context, store, _) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const TextWidget('Tema Escuro', fontSize: 13),
+                    Switch(
+                      value: store.theme == ThemeMode.dark,
+                      onChanged: (bool isDark) {
+                        context.read<HomeStore>().toggleTheme(isDark);
+                      },
+                      activeColor: kBackground,
+                    ),
+                  ],
+                );
+              }),
+            ],
+          ),
         ),
       ),
     );
