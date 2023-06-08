@@ -1,5 +1,3 @@
-# mjv_adriano_bitencourt
-
 # MJV Academy bootcamp trilha Flutter
 
 O presente repositório é um compilado de desafios construídos durante o Bootcamp da MJV Academy na trilha de Flutter. Todas as features do bootcamp serão informados abaixo:
@@ -45,7 +43,7 @@ Link do Github Projects(Kanban): https://github.com/users/ambitencourt/projects/
 Seguem telas:
 
 
-<img src="https://github.com/ambitencourt/desafio_banco_amigo/blob/master/assets/images/Presentation/login.jpg" height="300em"/><img src="https://github.com/ambitencourt/desafio_banco_amigo/blob/master/assets/images/Presentation/register.jpg" height="300em"/><img src="https://github.com/ambitencourt/desafio_banco_amigo/blob/master/assets/images/Presentation/register2.jpg" height="300em"/><img src="https://github.com/ambitencourt/desafio_banco_amigo/blob/master/assets/images/Presentation/home.jpg" height="300em"/><img src="https://github.com/ambitencourt/desafio_banco_amigo/blob/master/assets/images/Presentation/home2.jpg" height="300em"/>
+<img src="https://github.com/ambitencourt/mjv_adriano_bitencourt/blob/desafio1/assets/Desafio%201.gif" height="300em"/><img src="https://github.com/ambitencourt/mjv_adriano_bitencourt/blob/desafio1/assets/Desafio%20aula1.png" height="300em"/><img/>
 
 
 ## 🏁Como utilizar
