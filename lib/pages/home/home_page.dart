@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../core/constants.dart';
-import '../../core/custom_spacer.dart';
-import '../../core/text_widget.dart';
+import '../../components/constants.dart';
+import '../../components/custom_spacer.dart';
+import '../../components/text_widget.dart';
 import '../../stores/home_store.dart';
 import 'profile_widget.dart';
 
@@ -36,7 +36,10 @@ class _HomePageState extends State<HomePage> {
                     Row(
                       children: [
                         const Icon(Icons.list),
-                        const SizedBox(width: 8),
+                        const CustomSpacer(
+                          isHorizontal: true,
+                          size: 8,
+                        ),
                         TextWidget('Total de notas: ${store.count}',
                             fontSize: 13),
                       ],
@@ -45,7 +48,10 @@ class _HomePageState extends State<HomePage> {
                     Row(
                       children: [
                         const Icon(Icons.list),
-                        const SizedBox(width: 8),
+                        const CustomSpacer(
+                          isHorizontal: true,
+                          size: 8,
+                        ),
                         TextWidget('Concluídas: ${store.count}', fontSize: 13),
                       ],
                     ),

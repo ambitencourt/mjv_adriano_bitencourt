@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../core/constants.dart';
-import '../../core/text_widget.dart';
+import '../../components/constants.dart';
+import '../../components/custom_icon_button.dart';
+import '../../components/custom_spacer.dart';
+import '../../components/text_widget.dart';
 
 class ProfileWidget extends StatelessWidget {
   const ProfileWidget({super.key});
@@ -18,12 +20,13 @@ class ProfileWidget extends StatelessWidget {
               backgroundColor: kBackground,
               child: TextWidget('A', color: kWhite),
             ),
-            const SizedBox(
-              width: 7,
+            const CustomSpacer(
+              isHorizontal: true,
+              size: 7,
             ),
             const TextWidget('Adriano Bitencourt', fontWeight: FontWeight.bold),
-            const Spacer(),
-            IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert)),
+            const CustomSpacer(isFull: true),
+            CustomIconButton(onPressed: () {}, icon: Icons.more_vert),
           ],
         ),
       ),
