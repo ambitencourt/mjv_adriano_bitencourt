@@ -1,86 +1,62 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:mjv_adriano_bitencourt/pages/tabs/perfil.dart';
 
-import '../../components/constants.dart';
-import '../../components/custom_spacer.dart';
-import '../../components/text_widget.dart';
-import '../../stores/home_store.dart';
-import 'profile_widget.dart';
+import '../../components/app_bar_component.dart';
+import '../tabs/afazeres_tab.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  late int abaSelecionada;
+
+  final List<BottomNavigationBarItem> _abas = [
+    const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+    const BottomNavigationBarItem(
+        icon: Icon(Icons.account_circle), label: 'Perfil'),
+  ];
+
+  final List<Widget> _conteudos = [
+    AfazeresTab(
+      valorIniciaL: 0,
+      callback: (tabIdx) {
+        debugPrint(tabIdx.toString());
+      },
+    ),
+    const ProfileTab(),
+  ];
+
+  void handleTab(int tabIdx) {
+    setState(() {
+      abaSelecionada = tabIdx;
+    });
+  }
+
+  @override
+  void initState() {
+    abaSelecionada = 0;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        top: true,
-        child: Container(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const ProfileWidget(),
-              const CustomSpacer(),
-              const Divider(),
-              const TextWidget('Minhas estatísticas', fontSize: 18),
-              const CustomSpacer(),
-              Consumer<HomeStore>(builder: (context, store, _) {
-                return Column(
-                  children: [
-                    Row(
-                      children: [
-                        const Icon(Icons.list),
-                        const CustomSpacer(
-                          isHorizontal: true,
-                          size: 8,
-                        ),
-                        TextWidget('Total de notas: ${store.count}',
-                            fontSize: 13),
-                      ],
-                    ),
-                    const CustomSpacer(),
-                    Row(
-                      children: [
-                        const Icon(Icons.list),
-                        const CustomSpacer(
-                          isHorizontal: true,
-                          size: 8,
-                        ),
-                        TextWidget('Concluídas: ${store.count}', fontSize: 13),
-                      ],
-                    ),
-                  ],
-                );
-              }),
-              const CustomSpacer(),
-              const Divider(),
-              const CustomSpacer(),
-              const TextWidget('Configurações', fontSize: 18),
-              const CustomSpacer(),
-              Consumer<HomeStore>(builder: (context, store, _) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const TextWidget('Tema Escuro', fontSize: 13),
-                    Switch(
-                      value: store.theme == ThemeMode.dark,
-                      onChanged: (bool isDark) {
-                        context.read<HomeStore>().toggleTheme(isDark);
-                      },
-                      activeColor: kBackground,
-                    ),
-                  ],
-                );
-              }),
-            ],
-          ),
-        ),
+      appBar: const AppBarComponent(),
+      body: _conteudos.elementAt(abaSelecionada),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: abaSelecionada,
+        items: _abas,
+        onTap: handleTab,
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          handleTab(1);
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }
